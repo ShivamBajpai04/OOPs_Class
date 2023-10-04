@@ -57,4 +57,51 @@ int main(){
             }
         }
     }
+    cout<<endl;
+
+    //Optimal code
+    int N,M;
+    cin>>N>>M;
+    int arr1[N][M];
+    for(int i=0;i<N;i++){
+        for(int j=0;j<M;j++){
+            cin>>arr1[i][j];
+        }
+    }
+    int i=0,j=0;
+    bool up=true;
+    int k=0;
+    while(k<N*M){
+        if(up){
+            while(i>=0 && j<M){
+                cout<<arr1[i][j]<<"u ";
+                i--;
+                j++;
+                k++;
+            }
+            if(i<0 && j<=M-1){
+                i=0;
+            }
+            if(j==M){
+                i=i+2;
+                j--;
+            }
+        }
+        else{
+            while(i<N && j>=0){
+                cout<<arr1[i][j]<<"d ";
+                i++;
+                j--;
+                k++;
+            }
+            if(j<0 && i<=N-1){
+                j=0;
+            }
+            if(i==N){
+                j=j+2;
+                i--;
+            }
+        }
+        up=!up;
+    }
 }
