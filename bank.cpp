@@ -5,7 +5,7 @@ using namespace std;
 class Account{
     private:
         int pwd;
-        unsigned int balance=0;
+        long int balance=0;                
     public:
         string Acc_holder_name;
         int Acc_no;
