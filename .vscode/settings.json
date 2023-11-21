@@ -4,6 +4,7 @@
         "new": "cpp",
         "utility": "cpp",
         "xutility": "cpp",
-        "string": "cpp"
+        "string": "cpp",
+        "unordered_map": "cpp"
     }
 }

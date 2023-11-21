@@ -1,36 +1,74 @@
-#include <iostream>
-#include <bits/stdc++.h>
+#include<iostream>
 using namespace std;
-// int main(){
-//     string name;
-//     int roll_no;
-//     cin>>roll_no;
-//     getchar();
-//     getline(cin,name);
-//     cout<<name<<" "<<roll_no;
-// }
-int main(){
-    int n,m;
-    cin>>n>>m;
-    int arr[n][m];
-    //input of 2-d array
-    for(int i=0;i<n;i++){
-        for(int j=0;j<m;j++){
-            cin>>arr[i][j];
-        }
+#include <vector>
+#include <unordered_map>
+
+//cart,user,admin,stores,inventory,products,payment/checkout
+
+class Product{
+    int p_id;
+    string name;
+    int price;
+    public:
+    Product(int id,string n,int pr){
+        p_id=id;
+        name=n;
+        price=pr;
     }
-    //output of 2-d array
-    for(int i=0;i<n;i++){
-        if(i%2==0){
-            for(int j=0;j<m;j++){
-                cout<<arr[j][i]<<" ";
-            }    
+    bool operator==(Product p){
+        return p_id==p.p_id;
+    }
+    //getters
+    
+    int get_id(){
+        return p_id;
+    }
+
+    string get_name(){
+        return name;
+    }
+
+    int get_price(){
+        return price;
+    }
+
+};
+class Cart{
+
+    unordered_map<Product,int> sp;
+    public:
+
+    void add(Product p, int q){
+        if(sp.find(p)==sp.end()){
+            sp[p]=q;
         }
         else{
-            for(int j=m-1;j>=0;j--){
-                cout<<arr[j][i]<<" ";
-            }
+            sp[p]+=q;
         }
-        cout<<endl;
     }
+
+    void del(Product p){
+        sp.erase(p);
+    }
+
+    void display(){
+        for(auto i=sp.begin();i!=sp.end();i++){
+            cout<<i->first.get_name()<<" "<<i->second<<endl;
+        }
+    }
+
+};
+
+int main(){
+    Product p1(10,"ok",10);
+    Product p2(20,"o",10);
+    Product p3(30,"k",10);
+    Product p4(40,"t",10);
+    Cart i;
+    i.display();  
+    i.add(p1,10);
+    i.add(p2,10);
+    i.add(p3,10);
+    i.add(p4,10);
+    i.del(p2);
 }
