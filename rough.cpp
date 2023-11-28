@@ -53,7 +53,7 @@ class Cart{
 
     void display(){
         for(auto i=sp.begin();i!=sp.end();i++){
-            cout<<i->first.get_name()<<" "<<i->second<<endl;
+            cout<<i.first.get_name()<<" "<<i->second<<endl;
         }
     }
 

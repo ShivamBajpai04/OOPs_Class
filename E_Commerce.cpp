@@ -7,7 +7,10 @@ using namespace std;
 //admin aur user create krne ke functions
 //users aur admins ka database
 //1 admin muoltiple stores
-
+class Person{
+    public:
+    string name;
+};
 
 class Product{
     int p_id;
@@ -79,8 +82,7 @@ class Cart:public Inventory{
     }
 };
 
-class User{
-    string name;
+class User:public Person{
     int u_id;
     Cart c;
     public:
@@ -105,8 +107,6 @@ class User{
 
 };
 
-
-
 class Store{
     int s_id;
     Inventory i;
@@ -129,7 +129,7 @@ class Store{
 
 };
 
-class Admin{
+class Admin:public Person{
     int a_id;
     Store s;
     int pwd;
@@ -199,16 +199,16 @@ void run_Admin_console(Admin a,int s_id){
 }
 
 void run_User_console(User u,Admin a){
-    int ch;
-    cout<<"1. Add to cart\n2. Delete from cart\n3. Display cart\n4. Checkout\n5. Exit\n";
-    cin>>ch;
-    while(ch!=5){
+    while(true){
+        int ch;
+        cout<<"1. Add to cart\n2. Delete from cart\n3. Display cart\n4. Checkout\n5. Exit\n";
+        cin>>ch;
+        vector <pair<Product,int>> li=a.get_store().get_inventory().get_sp();
         switch(ch){
             case 1:{
                 int id,qty;
                 cout<<"Enter id, quantity\n";
                 cin>>id>>qty;
-                vector <pair<Product,int>> li=a.get_store().get_inventory().get_sp();
                 bool found=false;
                 for(int i=0;i<li.size();i++){
                     if(li[i].first.get_id()==id){
@@ -217,7 +217,7 @@ void run_User_console(User u,Admin a){
                             break;
                         }
                         u.add_to_cart(li[i].first,qty);
-
+                        li[i].second-=qty;
                         found=true;
                         break;
                     }
@@ -230,7 +230,6 @@ void run_User_console(User u,Admin a){
                 int id;
                 cout<<"Enter id\n";
                 cin>>id;
-                vector <pair<Product,int>> li=a.get_store().get_inventory().get_sp();
                 bool found=false;
                 for(int i=0;i<li.size();i++){
                     if(li[i].first.get_id()==id){
@@ -244,11 +243,20 @@ void run_User_console(User u,Admin a){
                 }
                 break;
             }
+            case 3:{
+                u.display_cart();
+            }
+            case 4:{
+                u.checkout();
+            }
+            case 5:{
+                return;
+            }
+        }
+    }
+}
 
 
 int main(){
-    Product p1(1,"p1",100);
-
-    
     
 }

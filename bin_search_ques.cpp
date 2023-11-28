@@ -21,7 +21,7 @@ int main(){
     int ans;
     int mid=(s+e)/2;
     while(s<e){
-        if(sum(v,mid)>=target){
+        if(sum(v,mid)>target){
             ans=mid;
             s=mid+1;
         }
