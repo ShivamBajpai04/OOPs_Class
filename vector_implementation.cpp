@@ -1,33 +1,35 @@
 #include <iostream>
 using namespace std;
 
+template <typename T>
 
 class Vector{
     int max_size;
-    int* arr;
+    T* arr;
     int i;
     public:
         Vector(){
-            arr=new int[1];
+            arr=new T[1];
             max_size=1;
             i=0;
         }
         Vector(int s){
-            arr=new int[s];
+            arr=new T[s];
             max_size=s;
             i=0;
         }
-        Vector(int s,int fill){
-            arr=new int[s];
+        Vector(int s,T fill){
+            arr=new T[s];
             max_size=s;
             i=0;
             for(int j=0;j<s;j++){
                 arr[j]=fill;
+                i++;
             }
         }
-        void append(int elem){
+        void append(T elem){
             if (i == max_size){
-                int* temp = new int[2 * max_size];
+                T* temp = new T[2 * max_size];
 
                 for (int i = 0; i < max_size; i++) {
                     temp[i] = arr[i];
@@ -61,23 +63,26 @@ class Vector{
         int capacity(){
             return max_size;
         }
+        T operator[](int index){
+            return arr[index];
+        }
+
+        friend ostream& operator<<(ostream& os,Vector<T>& v);
 
 };
 
-int main(){
-    int n;
-    cin>>n;
-    Vector v;
-    Vector v1(n);
-    for(int i=0;i<n;i++){
-        int x;
-        cin>>x;
-        v.append(x);
-        v1.append(x);
+template <typename T>
+ostream& operator << (ostream& os,Vector<T>& v){
+    for(int j=0;j<v.i;j++){
+        os<<v[j];
     }
-    cout<<v1.capacity()<<endl;
-    v1.append(99);
-    cout<<v1.capacity()<<endl;
-    v.print();
-    v1.print();
+    return os;
+}
+
+int main(){
+    int n=5;
+    Vector <int>v;
+    Vector <char>v1(n,'5');
+    cout<<v.capacity()<<endl;
+    cout<<v1;
 }

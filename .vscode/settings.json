@@ -5,6 +5,8 @@
         "utility": "cpp",
         "xutility": "cpp",
         "string": "cpp",
-        "unordered_map": "cpp"
+        "unordered_map": "cpp",
+        "iosfwd": "cpp",
+        "istream": "cpp"
     }
 }
